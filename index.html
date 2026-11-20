@@ -1,0 +1,501 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Képletek és nevek</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky-free single column; topbar (filters) > tab strip > one working view. Cations warm, anions cool. */
+:root{--bg:#eef2f6;--surface:#fff;--fg:#13222e;--muted:#55677a;--line:#d3dce5;--accent:#0f6b8a;--accent-fg:#fff;
+--cat:#b8430f;--cat-bg:#fbe9df;--an:#1b5fb4;--an-bg:#e1ecfa;--ok:#1f7a45;--ok-bg:#dff3e6;--bad:#b3261e;--bad-bg:#fbe3e1;--tip:#6b5200;--tip-bg:#fff1c2;
+--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a22;--surface:#17262f;--fg:#e6eef4;--muted:#9aaebd;--line:#2b3f4c;--accent:#5ec0e0;--accent-fg:#06222d;--cat:#ff9a62;--cat-bg:#3a2316;--an:#7db4ff;--an-bg:#172a45;--ok:#6fd49a;--ok-bg:#15341f;--bad:#ff8f87;--bad-bg:#3d1b19;--tip:#f3d36b;--tip-bg:#3a3010;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1a22;--surface:#17262f;--fg:#e6eef4;--muted:#9aaebd;--line:#2b3f4c;--accent:#5ec0e0;--accent-fg:#06222d;--cat:#ff9a62;--cat-bg:#3a2316;--an:#7db4ff;--an-bg:#172a45;--ok:#6fd49a;--ok-bg:#15341f;--bad:#ff8f87;--bad-bg:#3d1b19;--tip:#f3d36b;--tip-bg:#3a3010;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);padding-block:12px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-size:1.5rem;margin:0;font-weight:600;text-wrap:balance}h2{font-size:1.15rem;margin:0 0 6px;font-weight:600;text-wrap:balance}h3{font-size:1rem;margin:0;font-weight:600}
+p{margin:0}.muted{color:var(--muted)}.small{font-size:.85rem}
+.topbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select,input[type=text],button{font:inherit;color:var(--fg)}
+select,input[type=text]{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0}
+input[type=text]{width:100%}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:9px 14px;cursor:pointer;font-weight:500}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.btn.tip{background:var(--tip-bg);color:var(--tip);border-color:var(--tip)}
+.btn.ok{background:var(--ok-bg);color:var(--ok);border-color:var(--ok)}
+.btn.bad{background:var(--bad-bg);color:var(--bad);border-color:var(--bad)}
+.btn[disabled]{opacity:.5;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+details.sel{position:relative}details.sel>summary{list-style:none;cursor:pointer}details.sel>summary::-webkit-details-marker{display:none}
+.selbox{position:absolute;z-index:5;left:0;top:calc(100% + 4px);width:min(300px,86vw);max-height:60vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;box-shadow:0 6px 24px #0003}
+.selbox label{display:flex;gap:8px;align-items:center;cursor:pointer}
+#tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+#tabs a{flex:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;font-weight:500;white-space:nowrap}
+#tabs a[aria-current=page]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.fx{font-family:var(--mono);font-weight:500;font-size:1.25em;overflow-wrap:anywhere}
+.big{font-size:1.5rem;text-align:center;padding:10px 0;overflow-wrap:anywhere}.big .fx{font-size:1.5rem}
+sub,sup{line-height:0}
+.lab{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.opt{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;cursor:pointer;min-height:48px;overflow-wrap:anywhere}
+.opt:hover:not([disabled]){border-color:var(--accent)}
+.opt.right{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.opt.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.opt.gone{opacity:.25;text-decoration:line-through}
+.tipbox{background:var(--tip-bg);color:var(--tip);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.tipbox:empty{display:none}
+.fb{padding:10px 12px;border-radius:8px}.fb.ok{background:var(--ok-bg);color:var(--ok)}.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.bar{height:8px;background:var(--line);border-radius:999px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--accent)}
+.stat{display:flex;gap:14px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.flip{min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:8px;text-align:center}
+.back{border-top:1px dashed var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px;text-align:center}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pair>div{display:flex;flex-direction:column;gap:8px;min-width:0}
+.pc{min-height:46px}.pc.sel{border-color:var(--accent);outline:2px solid var(--accent)}.pc.done{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);pointer-events:none}
+.pc.hint{outline:3px dashed var(--tip)}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}.shake{animation:shake .25s}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}}
+.ionrow{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
+.ion{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;border-radius:10px;min-width:130px}
+.ion.c{background:var(--cat-bg);color:var(--cat)}.ion.a{background:var(--an-bg);color:var(--an)}
+.step{display:flex;gap:8px;align-items:center}.step .btn{width:40px;padding:6px}.step b{min-width:1.5em;text-align:center;font-size:1.2rem}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px}th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td.hid{color:transparent;background:var(--line);cursor:pointer;user-select:none;border-radius:4px}
+tr.sh td{background:var(--bg);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.mini{background:var(--bg);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cat{color:var(--cat)}.an{color:var(--an)}
+@media (max-width:480px){.pair{gap:8px}.card{padding:14px}}
+</style>
+<div class="wrap">
+<div class="topbar"><h1>Képletek és nevek</h1><span class="muted small" id="known"></span></div>
+<div class="filters"><details class="sel"><summary class="btn" id="secsum">Témakör</summary><div class="selbox" id="secbox"></div></details>
+<label class="row small muted">Irány <select id="dir" aria-label="Feladat iránya"></select></label></div>
+<nav id="tabs" aria-label="Feladattípusok"></nav>
+<main id="view"></main>
+</div>
+<script>
+const SECS=[
+{id:'ion',t:'Ionok',h:'A töltés a periódusos rendszerből vagy a savból (H⁺ leadásával) jön.'},
+{id:'f',t:'Fluorvegyületek',h:'A fluor a VII. főcsoportban van: F⁻.'},
+{id:'cl',t:'Klórvegyületek',h:'Kloridok: Cl⁻. A klór-oxosavaknál az oxigének száma négytől egyig csökken.'},
+{id:'ox',t:'Oxidok',h:'Oxid: O²⁻. A tudományos név előtagja (di-, tri-) megmondja az atomszámot.'},
+{id:'oh',t:'Hidroxidok',h:'Hidroxid: OH⁻. A lúgok hidroxidok.'},
+{id:'s',t:'Szulfidok',h:'Szulfid: S²⁻. Sok ásvány szulfid, nevük gyakran -it végű.'},
+{id:'so4',t:'Szulfátok',h:'Szulfát: SO₄²⁻. A gálicok kristályvizes fém-szulfátok, a szín árulja el a fémet.'},
+{id:'s2',t:'Egyéb kénvegyületek',h:'A -it eggyel kevesebb oxigént jelent, mint az -át.'},
+{id:'no3',t:'Nitrátok',h:'Nitrát: NO₃⁻ (salétromsav sója).'},
+{id:'no2',t:'Nitritek',h:'Nitrit: NO₂⁻ (salétromossav sója).'},
+{id:'cn',t:'Cianidok',h:'Cianid: CN⁻. A vérlúgsóknál a vas töltése dönti el, a sárga vagy a vörös az.'},
+{id:'po4',t:'Foszfátok',h:'Foszfát: PO₄³⁻. A hidrogén- és dihidrogén- előtag a megmaradt H-ket jelzi.'},
+{id:'co3',t:'Karbonátok',h:'Karbonát: CO₃²⁻, hidrogén-karbonát: HCO₃⁻. A karbonátok savval pezsegnek.'},
+{id:'eg',t:'Egyéb',h:'Vegyes rész: keverékek (királyvíz, durranógáz), hidridek, komplexek.'}
+];
+const RAW=`
+ion|hidrogénion|H^+^||I. főcsoport (a hidrogén különleges): 1 elektront ad le, +1.
+ion|nátriumion|Na^+^||I. főcsoport → +1.
+ion|káliumion|K^+^||I. főcsoport → +1.
+ion|magnéziumion|Mg^2+^||II. főcsoport → +2.
+ion|kalciumion|Ca^2+^||II. főcsoport → +2.
+ion|báriumion|Ba^2+^||II. főcsoport → +2.
+ion|alumíniumion|Al^3+^||III. főcsoport → +3.
+ion|ólom(II)ion|Pb^2+^||A zárójeles római szám a töltés: II → 2+.
+ion|ón(II)ion|Sn^2+^||A zárójeles római szám a töltés: II → 2+.
+ion|vas(II)ion|Fe^2+^||A zárójeles római szám a töltés: II → 2+. A zöldgálic vasa ez.
+ion|vas(III)ion|Fe^3+^||A zárójeles római szám a töltés: III → 3+.
+ion|kobalt(II)ion|Co^2+^||A zárójeles római szám a töltés: II → 2+.
+ion|nikkel(II)ion|Ni^2+^||A zárójeles római szám a töltés: II → 2+.
+ion|réz(I)ion|Cu^+^||A zárójeles római szám a töltés: I → 1+.
+ion|réz(II)ion|Cu^2+^||A zárójeles római szám a töltés: II → 2+. A rézgálic ezt tartalmazza.
+ion|ezüst(I)ion|Ag^+^||Az ezüstnek általában csak az I-es töltése fordul elő.
+ion|cinkion|Zn^2+^||A cink nevében nincs szám, mert szinte mindig 2+.
+ion|higany(I)ion|Hg2^2+^||Kételemű ion: két Hg együtt viseli a 2+ töltést.
+ion|higany(II)ion|Hg^2+^||A zárójeles római szám a töltés: II → 2+.
+ion|oxóniumion|H3O^+^||Víz + H⁺ (H₂O + H⁺).
+ion|ammóniumion|NH4^+^||Ammónia + H⁺ (NH₃ + H⁺).
+ion|fluoridion|F^-^||VII. főcsoport: 1 elektront vesz fel → −1.
+ion|kloridion|Cl^-^||VII. főcsoport → −1.
+ion|bromidion|Br^-^||VII. főcsoport → −1.
+ion|jodidion|I^-^||VII. főcsoport → −1.
+ion|oxidion|O^2-^||VI. főcsoport: 2 elektront vesz fel → −2.
+ion|szulfidion|S^2-^||VI. főcsoport → −2.
+ion|peroxidion|O2^2-^||Két oxigén együtt, 2− töltéssel (a H₂O₂ anionja).
+ion|hidroxidion|OH^-^||A víz egy H⁺-t adott le.
+ion|hidrogén-szulfid-ion|HS^-^||H₂S − H⁺.
+ion|szulfátion|SO4^2-^||H₂SO₄ − 2 H⁺.
+ion|hidrogén-szulfát-ion|HSO4^-^||H₂SO₄ − 1 H⁺: még egy H marad.
+ion|tioszulfátion|S2O3^2-^||Olyan szulfát, amiben egy O helyett S áll (tio-).
+ion|szulfition|SO3^2-^||-it: eggyel kevesebb O, mint a szulfátban.
+ion|hidrogén-szulfit-ion|HSO3^-^||Szulfition + 1 H.
+ion|nitrátion|NO3^-^||HNO₃ − H⁺.
+ion|nitrition|NO2^-^||-it: eggyel kevesebb O, mint a nitrátban.
+ion|foszfátion|PO4^3-^||H₃PO₄ − 3 H⁺.
+ion|hidrogén-foszfát-ion|HPO4^2-^||Egy H maradt a foszfáton.
+ion|dihidrogén-foszfát-ion|H2PO4^-^||Két H maradt a foszfáton.
+ion|karbonátion|CO3^2-^||H₂CO₃ − 2 H⁺.
+ion|hidrogén-karbonát-ion|HCO3^-^||H₂CO₃ − 1 H⁺.
+ion|karbidion|C2^2-^||Két szénatom együtt, 2− töltéssel.
+ion|cianidion|CN^-^||HCN − H⁺.
+ion|perklorátion|ClO4^-^||A klór-oxoanionok közül a legtöbb oxigént (4) tartalmazza.
+ion|klorátion|ClO3^-^||Három oxigén.
+ion|klorition|ClO2^-^||Két oxigén.
+ion|hipoklorition|OCl^-^||A legkevesebb oxigén (1).
+ion|permanganátion|MnO4^-^||Mn(VII), ibolya színű; kevesebb töltésű, mint a manganát.
+ion|manganátion|MnO4^2-^||Mn(VI), zöld színű.
+ion|kromátion|CrO4^2-^||Sárga. A bikromát két krómot tartalmaz.
+ion|bikromátion|Cr2O7^2-^||Két króm (bi-), narancssárga.
+ion|szilikátion|SiO3^2-^||H₂SiO₃ (kovasav) − 2 H⁺.
+f|hidrogén-fluorid|HF|folysav|H + F, mint a HCl.
+f|kalcium-fluorid|CaF2|folypát, fluorit|Ca²⁺ + 2 F⁻.
+f|nátrium-hexafluoro-aluminát // nátrium-[hexafluorido-aluminát(III)]|Na3AlF6|kriolit|Hat F az Al körül: [AlF₆]³⁻, a töltést 3 Na⁺ egyenlíti ki.
+cl|hidrogén-klorid|HCl|vizes oldata a sósav|H + Cl.
+cl|ammónium-klorid|NH4Cl|szalmiáksó|NH₄⁺ + Cl⁻.
+cl|nátrium-klorid|NaCl|konyhasó, kősó, halit|Na⁺ + Cl⁻.
+cl|kálium-klorid|KCl|kálisó, fedősó, szilvin|K⁺ + Cl⁻.
+cl|kálium-magnézium-klorid|2 KCl·MgCl2|karnallit|Két KCl és egy MgCl₂ együtt (kettős só).
+cl|higany(II)-klorid|HgCl2|szublimát|Hg²⁺ + 2 Cl⁻.
+cl|higany(I)-klorid|Hg2Cl2|kalomel|Hg₂²⁺ + 2 Cl⁻: a higany(I) kételemű.
+cl|perklórsav|HClO4||Perklorát + H⁺; legtöbb oxigén.
+cl|klórsav|HClO3||Klorát + H⁺.
+cl|klórossav|HClO2||Klorit + H⁺.
+cl|hipoklórossav|HOCl||Hipoklorit + H⁺; legkevesebb oxigén.
+cl|nátrium-hipoklorit|NaOCl|hypo|Na⁺ + OCl⁻.
+cl|kalcium-hipoklorit|Ca(OCl)2|klórmész|Ca²⁺ + 2 OCl⁻.
+cl|freon-1,2|CF2Cl2||Szén két fluorral és két klórral.
+cl||COCl2|foszgén|Szén-monoxid + Cl₂.
+ox|dihidrogén-monoxid|H2O|víz|Di- = 2 hidrogén, mono- = 1 oxigén.
+ox|hidrogén-peroxid|H2O2||Peroxid: O₂²⁻, két H⁺ egyenlíti ki.
+ox|lítium-oxid|Li2O||Li⁺ + O²⁻: két Li kell.
+ox|nátrium-peroxid|Na2O2||Na⁺ + O₂²⁻.
+ox|kálium-szuperoxid|KO2||Szuperoxid: O₂⁻, ezért 1 K elég.
+ox|magnézium-oxid|MgO|égetett magnézia|Mg²⁺ + O²⁻.
+ox|kalcium-oxid|CaO|égetett mész|Ca²⁺ + O²⁻; az égetett mész a mészkő kiégetéséből jön.
+ox|bór-trioxid|B2O3|bórüveg|Tri- = 3 oxigén, a bór III. főcsoportos.
+ox|alumínium-oxid|Al2O3|timföld, korund, smirgel|Al³⁺ + O²⁻ → 2·3 = 3·2.
+ox|szén-dioxid|CO2|mustgáz|Di- = 2 oxigén.
+ox|szilícium-dioxid|SiO2|kvarc, homok, krisztobalit, opál, tridimit|Di- = 2 oxigén, a homok anyaga.
+ox|ón(IV)-oxid|SnO2|ónhamu, kassziterit, ónkő|Sn⁴⁺ + 2 O²⁻.
+ox||Pb3O4|mínium|Vegyes oxid: ólom és oxigén 3:4 arányban.
+ox|dinitrogén-monoxid|N2O|kéjgáz, nitro|Di- = 2 nitrogén, mono- = 1 oxigén.
+ox|titán(IV)-oxid|TiO2|rutil|Ti⁴⁺ + 2 O²⁻.
+ox|mangán(IV)-oxid|MnO2|barnakő, piroluzit|Mn⁴⁺ + 2 O²⁻.
+ox||Mn3O4|hauszmannit|Vegyes oxid: mangán és oxigén 3:4 arányban.
+ox|vas(III)-oxid|Fe2O3|vörösvasérc, hematit|Fe³⁺ + O²⁻ → 2·3 = 3·2; vörös szín.
+ox|kristályvizes vas(III)-oxid|Fe2O3·2 H2O|limonit|Vas(III)-oxid + 2 kristályvíz.
+ox||Fe3O4 (FeO·Fe2O3)|magnetit|FeO és Fe₂O₃ együtt; mágneses.
+ox|réz(I)-oxid|Cu2O|kuprit|Cu⁺ + O²⁻: két Cu kell.
+oh|nátrium-hidroxid|NaOH|nátronlúg, marónátron, lúgkő, marószóda|Na⁺ + OH⁻.
+oh|kálium-hidroxid|KOH|kálilúg|K⁺ + OH⁻.
+oh|kalcium-hidroxid|Ca(OH)2|oltott mész, mésztej, meszes víz|Ca²⁺ + 2 OH⁻; az OH zárójelbe kerül.
+oh|alumínium-hidroxid|Al(OH)3|timföld-hidrát, hidrargillit|Al³⁺ + 3 OH⁻.
+oh|mangán(III)-oxi-hidroxid|MnO(OH)|manganit|Oxid + hidroxid egyben: Mn³⁺ + O²⁻ + OH⁻.
+oh|alumínium-oxi-hidroxid|AlO(OH)|böhmit, diaszpor|Oxid + hidroxid egyben: Al³⁺ + O²⁻ + OH⁻.
+oh|vas(III)-oxi-hidroxid|FeO(OH)|rozsda|Oxid + hidroxid egyben: Fe³⁺ + O²⁻ + OH⁻.
+s|dihidrogén-szulfid|H2S|kénhidrogén|Di- = 2 hidrogén.
+s|nátrium-szulfid|Na2S|kénmáj|2 Na⁺ + S²⁻.
+s|szén-diszulfid|CS2|szénkéneg|Di- = 2 kén.
+s|ólom(II)-szulfid|PbS|galenit|Pb²⁺ + S²⁻.
+s|arzén(III)-szulfid|As2S3|auripigment|As³⁺ + S²⁻ → 2·3 = 3·2.
+s||As4S4|realgár|Arzén és kén 1:1 arányban, négyes egységekben.
+s|antimon(III)-szulfid|Sb2S3|antimonit|Sb³⁺ + S²⁻ → 2·3 = 3·2.
+s||FeS2|pirit, vaskovand, kénkovand|Vas és két kén (a kén itt S₂²⁻ egység).
+s||CuFeS2|kalkopirit|Réz, vas és két kén.
+s||FeAsS|arzenopirit|Vas, arzén, kén.
+s|nikkel(II)-szulfid|NiS|millerit|Ni²⁺ + S²⁻.
+s||NiAsS2|gersdorfit|Nikkel, arzén, két kén.
+s||Co3S4|linneit|Kobalt és kén 3:4 arányban.
+s||CoAsS|kobaltit, kobaltin|Kobalt, arzén, kén.
+s|molibdén(IV)-szulfid|MoS2|molibdenit|Mo⁴⁺ + 2 S²⁻.
+s|ezüst(I)-szulfid|Ag2S|argentit|2 Ag⁺ + S²⁻.
+s|cink-szulfid|ZnS|szfalerit|Zn²⁺ + S²⁻.
+s|higany(II)-szulfid|HgS|cinnabarit, cinóber|Hg²⁺ + S²⁻; vörös festék.
+so4|dihidrogén-szulfát|H2SO4|kénsav|2 H⁺ + SO₄²⁻.
+so4|nátrium-szulfát|Na2SO4·10 H2O|glaubersó|2 Na⁺ + SO₄²⁻, tíz kristályvíz.
+so4|magnézium-szulfát|MgSO4·7 H2O|keserűsó|Mg²⁺ + SO₄²⁻, hét kristályvíz.
+so4|kristályvizes kalcium-szulfát|CaSO4·2 H2O|gipsz, alabástrom, máriaüveg|Kalcium-szulfát két kristályvízzel.
+so4||CaSO4·1/2 H2O|égetett gipsz|Fél kristályvíz maradt (részben vízmentes).
+so4|kalcium-szulfát|CaSO4|agyonégetett gipsz, anhidrit|Ca²⁺ + SO₄²⁻, kristályvíz nélkül.
+so4|stroncium-szulfát|SrSO4|cölesztin|Sr²⁺ + SO₄²⁻.
+so4|bárium-szulfát|BaSO4|barit|Ba²⁺ + SO₄²⁻.
+so4|vas(II)-szulfát|FeSO4·7 H2O|zöldgálic, vasgálic|Gálic: fém-szulfát hét kristályvízzel; zöld = vas.
+so4|réz(II)-szulfát|CuSO4·5 H2O|rézgálic, kékkő|Gálic: öt kristályvíz; kék = réz.
+so4||Ca(OH)2 + CuSO4·5 H2O|bordóilé|Mésztej és rézgálic keveréke.|m
+so4|cink-szulfát|ZnSO4·7 H2O|fehérgálic|Gálic: hét kristályvíz; fehér = cink.
+so4|kálium-alumínium-szulfát|KAl(SO4)2·12 H2O|timsó|K⁺ + Al³⁺ + 2 SO₄²⁻, tizenkét kristályvíz.
+so4|kálium-króm(III)-szulfát|KCr(SO4)2·12 H2O|krómtimsó|Mint a timsó, de az Al helyén Cr áll.
+so4|vas(II)-ammónium-szulfát|Fe(NH4)2(SO4)2·6 H2O|Mohr-só|Fe²⁺ + 2 NH₄⁺ + 2 SO₄²⁻, hat kristályvíz.
+so4||H2S2O7|dikénsav, vitriol, óleum|Két kénsav, egy vízzel kevesebb.
+s2|dihidrogén-szulfit|H2SO3|kénessav|-os sav: eggyel kevesebb O, mint a kénsavban.
+s2|nátrium-tioszulfát|Na2S2O3|fixírsó|2 Na⁺ + S₂O₃²⁻; a fényképezésnél használják.
+s2|kálium-metabiszulfit|K2S2O5|borkén|Borászatban használják.
+no3|hidrogén-nitrát|HNO3|salétromsav, választóvíz|H⁺ + NO₃⁻.
+no3|ammónium-nitrát|NH4NO3|mészkővel keverve = pétisó|NH₄⁺ + NO₃⁻.
+no3|nátrium-nitrát|NaNO3|chilei salétrom, salétrom|Na⁺ + NO₃⁻.
+no3|kálium-nitrát|KNO3|indiai salétrom, káli salétrom|K⁺ + NO₃⁻.
+no3|kalcium-nitrát|Ca(NO3)2|mészsalétrom, norvégsalétrom|Ca²⁺ + 2 NO₃⁻; a nitrát zárójelbe kerül.
+no3|ezüst(I)-nitrát|AgNO3|lápisz, pokolkő|Ag⁺ + NO₃⁻.
+no2|hidrogén-nitrit|HNO2|salétromossav|H⁺ + NO₂⁻.
+no2|kálium-nitrit|KNO2|pácsó|K⁺ + NO₂⁻.
+cn|hidrogén-cianid|HCN|kéksav, ciánsav|H⁺ + CN⁻.
+cn|kálium-cianid|KCN|cián, ciánkáli|K⁺ + CN⁻.
+cn|kálium-hexaciano-ferrát(II) // kálium-[hexacianido-ferrát(II)]|K4[Fe(CN)6]|sárgavérlúgsó|Fe²⁺ + 6 CN⁻ = 4−, ezt 4 K⁺ egyenlíti ki.
+cn|kálium-hexaciano-ferrát(III) // kálium-[hexacianido-ferrát(III)]|K3[Fe(CN)6]|vörösvérlúgsó|Fe³⁺ + 6 CN⁻ = 3−, ezt 3 K⁺ egyenlíti ki.
+cn||Fe4[Fe(CN)6]3|berlinikék|Fe³⁺ + [Fe(CN)₆]⁴⁻: 4·3 = 3·4.
+cn||Fe3[Fe(CN)6]2|turnbullkék|Fe²⁺ + [Fe(CN)₆]³⁻: 3·2 = 2·3.
+po4|trihidrogén-foszfát|H3PO4|foszforsav|3 H⁺ + PO₄³⁻.
+po4|trinátrium-foszfát|Na3PO4|trisó|3 Na⁺ + PO₄³⁻.
+po4|kalcium-foszfát|Ca3(PO4)2|csontliszt, foszforit, guano|Ca²⁺ + PO₄³⁻ → 3·2 = 2·3.
+po4|kalcium-dihidrogén-foszfát|Ca(H2PO4)2|szuperfoszfát|Ca²⁺ + 2 H₂PO₄⁻.
+po4||Ca5(PO4)3F|apatit, fluorapatit|5 Ca²⁺ + 3 PO₄³⁻ + F⁻: 10 = 9 + 1.
+po4||H4P2O7|difoszforsav|Két foszforsav, egy vízzel kevesebb.
+co3|dihidrogén-karbonát|H2CO3|szénsav|2 H⁺ + CO₃²⁻.
+co3|ammónium-karbonát|(NH4)2CO3|szalalkáli|2 NH₄⁺ + CO₃²⁻.
+co3|nátrium-karbonát|Na2CO3·10 H2O|szóda, sziksó|2 Na⁺ + CO₃²⁻, tíz kristályvíz.
+co3|nátrium-hidrogén-karbonát|NaHCO3|szódabikarbóna|Na⁺ + HCO₃⁻.
+co3|kálium-karbonát|K2CO3|hamuzsír|2 K⁺ + CO₃²⁻.
+co3|magnézium-karbonát|MgCO3|magnezit|Mg²⁺ + CO₃²⁻.
+co3|kalcium-karbonát|CaCO3|mész, mészkő, márvány, kalcit, aragonit, vízkő|Ca²⁺ + CO₃²⁻.
+co3|kalcium-magnézium-karbonát|CaCO3·MgCO3|dolomit|Két karbonát együtt: CaCO₃ és MgCO₃.
+co3|bárium-karbonát|BaCO3|witherit|Ba²⁺ + CO₃²⁻.
+co3|ólom(II)-karbonát|PbCO3|cerusszit|Pb²⁺ + CO₃²⁻.
+co3|bázisos réz(II)-karbonát|CuCO3·Cu(OH)2|patina, malachit|Karbonát és hidroxid egyben: zöld.
+co3|vas(II)-karbonát|FeCO3|sziderit, vaspát|Fe²⁺ + CO₃²⁻.
+co3|cink-karbonát|ZnCO3|cinkpát|Zn²⁺ + CO₃²⁻.
+eg||Hg|folyékony ezüst|Az egyetlen szobahőmérsékleten folyékony fém.
+eg|ammónia|NH3|vizes oldata a szalmiákszesz|N + 3 H.
+eg||PH3|foszfin|Mint az ammónia, de foszforral.
+eg||AsH3|arzin|Mint az ammónia, de arzénnel.
+eg||SiH4|szilán|Mint a metán, de szilíciummal.
+eg||D2O|nehézvíz|A D a deutérium (nehéz hidrogén).
+eg||NH2-NH2|hidrazin|Két NH₂ egység kapcsolódik.
+eg|kálium-permanganát|KMnO4|hipermangán|K⁺ + MnO₄⁻.
+eg|kálium-manganát|K2MnO4|ásványi kaméleon|2 K⁺ + MnO₄²⁻.
+eg|kovasav|H2SiO3||2 H⁺ + SiO₃²⁻.
+eg|nátrium-szilikát|Na2SiO3|vízüveg|2 Na⁺ + SiO₃²⁻.
+eg|ólom(II)-kromát|PbCrO4|vörös ólomérc|Pb²⁺ + CrO₄²⁻.
+eg|vas(II)-kromát|FeCr2O4|kromit, krómvaskő|Fe²⁺ és két Cr³⁺ együtt négy O²⁻-nel.
+eg|nátrium-tetraborát|Na2B4O7·10 H2O|bórax|Tetra- = 4 bór, tíz kristályvíz.
+eg|kálium-jodidos jódoldat|KI + I2|Lugol-oldat|Kálium-jodid és jód keveréke.|m
+eg|salétromsav:kénsav = 1:2|HNO3:H2SO4 = 1:2|nitrálósav, nitrálóelegy|Salétromsav és kénsav 1:2 arányban.|m
+eg|salétromsav:sósav = 1:3|HNO3:HCl = 1:3|királyvíz|Salétromsav és sósav 1:3 arányban; az aranyat is oldja.|m
+eg|hidrogén:oxigén = 2:1|H2:O2 = 2:1|durranógáz|Hidrogén és oxigén 2:1 arányban (a víz összetétele).|m
+eg|hidrogén:klór = 1:1|H2:Cl2 = 1:1|klórdurranógáz|Hidrogén és klór 1:1 arányban.|m
+eg|hidrogén:szén-monoxid = 3:1|H2:CO = 3:1|szintézisgáz|Hidrogén és szén-monoxid 3:1 arányban.|m
+eg||NiAs|nikkolit, nikkelin ördög|Nikkel és arzén 1:1 arányban.
+eg||CoAs2|szmaltit|Kobalt és két arzén.
+eg|dikálium-tetrajodo-merkurát(II) // kálium-[tetrajodido-merkurát(II)]|K2[HgI4]|Nessler-reagens|Hg²⁺ + 4 I⁻ = 2−, ezt 2 K⁺ egyenlíti ki.
+`;
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function fmt(s){let o='',i=0;while(i<s.length){const c=s[i];if(c==='^'){const j=s.indexOf('^',i+1);o+='<sup>'+esc(s.slice(i+1,j).replace(/-/g,'−'))+'</sup>';i=j+1;continue}
+if(/\d/.test(c)&&i>0&&/[A-Za-z)\]]/.test(s[i-1])){o+='<sub>'+c+'</sub>';i++;continue}o+=esc(c);i++}return o}
+const plain=s=>s.replace(/\^/g,'');
+const FX=f=>'<span class="fx">'+fmt(f)+'</span>';
+function normF(s){s=s.replace(/[₀-₉]/g,c=>String(c.charCodeAt(0)-0x2080)).replace(/[−‒–]/g,'-').replace(/\^/g,'').replace(/\s+/g,'').replace(/[.*•]/g,'·');
+const m=s.match(/^(.*?)([+-])(\d)$/);if(m)s=m[1]+m[3]+m[2];return s}
+const normT=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'');
+const isDesc=a=>/^vizes|=/.test(a);
+const secT=id=>SECS.find(s=>s.id===id);
+const lsGet=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+
+/* ---------- data ---------- */
+const E=RAW.trim().split('\n').map((l,i)=>{const p=l.split('|');return{id:i,sec:p[0],names:(p[1]||'').split(' // ').filter(Boolean),f:p[2],cs:(p[3]||'').split(', ').filter(Boolean),h:p[4]||'',mix:p[5]==='m'}});
+const G={dir:'mix',sel:new Set(lsGet('kn_sel',SECS.map(s=>s.id)))};
+let M=lsGet('kn_m',{});
+const mark=(id,ok)=>{const m=M[id]||(M[id]={ok:0,bad:0});ok?m.ok++:m.bad++;lsSet('kn_m',M);known()};
+const isKnown=id=>{const m=M[id];return m&&m.ok-m.bad>=2};
+const pool=()=>{const p=E.filter(e=>G.sel.has(e.sec));return p.length?p:E};
+
+/* ---------- tasks ---------- */
+const DIRS={mix:'Vegyes',n2f:'Név → képlet',f2n:'Képlet → név',c2f:'Hétköznapi név → képlet',f2c:'Képlet → hétköznapi név'};
+const avail=(e,d)=>d==='n2f'||d==='f2n'?e.names.length>0:e.cs.length>0;
+function mk(e,dir,noMix){
+ if(noMix&&e.mix)return null;
+ if(dir==='mix'){const a=['n2f','f2n','c2f','f2c'].filter(d=>avail(e,d));if(!a.length)return null;dir=rnd(a)}
+ else if(!avail(e,dir))return null;
+ const t={e,dir,sec:secT(e.sec)};
+ if(dir==='n2f'){t.q=esc(e.names[0]);t.qk='nev';t.a=[plain(e.f)];t.ak='formula';t.shown=FX(e.f)}
+ if(dir==='f2n'){t.q=FX(e.f);t.qk='formula';t.a=e.names;t.ak='nev';t.shown=esc(e.names[0])}
+ if(dir==='c2f'){const a=e.cs.filter(x=>!isDesc(x));t.q=esc(rnd(a.length?a:e.cs));t.qk='nev';t.a=[plain(e.f)];t.ak='formula';t.shown=FX(e.f)}
+ if(dir==='f2c'){t.q=FX(e.f);t.qk='formula';t.a=e.cs;t.ak='nev';t.shown=esc(e.cs.slice(0,2).join(', '))}
+ t.key=t.shown;return t}
+const tasks=(noMix)=>pool().map(e=>mk(e,G.dir,noMix)).filter(Boolean);
+function distract(t,n){const cand=shuffle(E.filter(e=>e.id!==t.e.id)).sort((a,b)=>(b.sec===t.e.sec)-(a.sec===t.e.sec)||Math.random()-.5);
+ const out=[],seen=new Set([t.key]);const acc=t.a.map(normT);
+ for(const e of cand){const d=mk(e,t.dir);if(!d||seen.has(d.key))continue;if(d.a.some(x=>acc.includes(normT(x))))continue;seen.add(d.key);out.push(d);if(out.length>=n)break}return out}
+function tips(t){const e=t.e,L=[];L.push('Témakör: <b>'+esc(t.sec.t)+'</b>. '+esc(t.sec.h));
+ if(e.h)L.push(esc(e.h));
+ const ans=t.ak==='formula'?plain(t.e.f):t.a[0];
+ if(t.ak==='formula'){const k=Math.ceil(ans.length/2);L.push('Az első fele: <span class="fx">'+esc(ans.slice(0,k))+'…</span> (összesen '+ans.length+' karakter)')}
+ else L.push('Így kezdődik: <b>'+esc(ans.slice(0,3))+'…</b> ('+ans.length+' karakter)');
+ return L}
+function check(t,v){const n=t.ak==='formula'?normF:normT;return t.a.some(x=>n(x)===n(v))}
+/* shared tip widget */
+function tipWidget(box,btn,list,onUse){let k=0;btn.onclick=()=>{if(k<list.length){const d=document.createElement('div');d.innerHTML='💡 '+list[k];box.appendChild(d);k++;onUse&&onUse(k)}if(k>=list.length)btn.disabled=true};
+ btn.textContent='Tipp';return()=>k}
+
+/* ---------- header ---------- */
+function known(){const c=E.filter(e=>isKnown(e.id)).length;$('#known').textContent='Ismert: '+c+' / '+E.length}
+function filters(){$('#secsum').textContent='Témakör ('+(G.sel.size===SECS.length?'mind':G.sel.size)+')';
+ const b=$('#secbox');b.innerHTML='<div class="row"><button class="btn" data-a="all">Mind</button><button class="btn" data-a="none">Egyik sem</button></div>'+
+ SECS.map(s=>'<label><input type="checkbox" value="'+s.id+'"'+(G.sel.has(s.id)?' checked':'')+'> '+esc(s.t)+' <span class="muted small">('+E.filter(e=>e.sec===s.id).length+')</span></label>').join('');
+ b.onchange=ev=>{ev.target.checked?G.sel.add(ev.target.value):G.sel.delete(ev.target.value);lsSet('kn_sel',[...G.sel]);$('#secsum').textContent='Témakör ('+(G.sel.size===SECS.length?'mind':G.sel.size)+')';route()};
+ b.onclick=ev=>{const a=ev.target.dataset.a;if(!a)return;G.sel=a==='all'?new Set(SECS.map(s=>s.id)):new Set();lsSet('kn_sel',[...G.sel]);filters();route()}}
+
+/* ---------- tabs ---------- */
+const TABS=[['logika','Logika'],['tananyag','Tananyag'],['flash','Flashcard'],['kviz','Kvíz'],['beiras','Beírás'],['parositas','Párosítás'],['ionkirako','Ionkirakó'],['savbol','Savból anion'],['toltes','Töltések'],['igazhamis','Igaz / hamis']];
+const R={};
+function route(){const h=(location.hash||'#logika').slice(1);const id=R[h]?h:'logika';
+ $('#tabs').innerHTML=TABS.map(([i,t])=>'<a href="#'+i+'"'+(i===id?' aria-current="page"':'')+'>'+t+'</a>').join('');
+ const v=$('#view');v.innerHTML='';R[id](v)}
+
+/* ---------- Logika ---------- */
+R.logika=v=>{v.innerHTML=`<div class="card"><h2>Mi az ion?</h2>
+<p>Az ion töltéssel rendelkező atom vagy atomcsoport. A <b class="cat">kation</b> (pozitív) elektront adott le, az <b class="an">anion</b> (negatív) elektront vett fel. Az atomok akkor stabilak, ha a legkülső héjuk tele van.</p>
+<div class="grid"><div class="mini"><h3>Töltés a periódusos rendszerből</h3><p>I. főcsoport: <b class="cat">+1</b> (H, Na, K)<br>II.: <b class="cat">+2</b> (Mg, Ca, Ba)<br>III.: <b class="cat">+3</b> (Al)<br>VI.: <b class="an">−2</b> (O, S)<br>VII.: <b class="an">−1</b> (F, Cl, Br, I)<br>Átmeneti fémek: a zárójeles szám a töltés, pl. vas(III) = Fe³⁺.</p></div>
+<div class="mini"><h3>Összetett anion a savból</h3><p>Vedd el a savból a H⁺-okat:<br>H₂SO₄ → HSO₄⁻ → SO₄²⁻<br>H₃PO₄ → H₂PO₄⁻ → HPO₄²⁻ → PO₄³⁻<br><b>-sav → -át</b>, <b>-os sav → -it</b> (eggyel kevesebb O).</p></div>
+<div class="mini"><h3>Klór-oxoanionok</h3><p>Az oxigének száma csökken:<br>ClO₄⁻ perklorát<br>ClO₃⁻ klorát<br>ClO₂⁻ klorit<br>OCl⁻ hipoklorit</p></div>
+<div class="mini"><h3>Képlet kirakása</h3><p>A töltések összege nulla.<br>Al³⁺ + SO₄²⁻ → Al₂(SO₄)₃ (2·3 = 3·2)<br>Ca²⁺ + OH⁻ → Ca(OH)₂<br>Az összetett iont zárójelbe tesszük, ha egynél több kell.</p></div>
+<div class="mini"><h3>Előtagok</h3><p>mono 1, di 2, tri 3, tetra 4, penta 5, hexa 6.<br>hidrogén- / dihidrogén-: hány H maradt.<br>A névből kiolvasható a képlet: kálium-hexaciano-ferrát(II) = K + 6 CN + Fe(II).</p></div>
+<div class="mini"><h3>Hétköznapi nevek csoportjai</h3><p><b>Gálicok</b>: kristályvizes fém-szulfát. Zöld = Fe, kék = Cu, fehér = Zn.<br><b>Lúgok</b>: nátronlúg NaOH, kálilúg KOH.<br><b>Vérlúgsó</b>: sárga = Fe(II), vörös = Fe(III).<br><b>Higany</b>: szublimát HgCl₂, kalomel Hg₂Cl₂.<br><b>Ásványok</b>: gyakran -it végűek, anion szerint csoportosíthatók.</p></div></div>
+<p class="muted small">Javasolt sorrend: Töltések → Savból anion → Ionkirakó → Tananyag olvasása → Flashcard → Kvíz → Beírás. A Tipp gomb mindenhol csak kérésre ad segítséget.</p></div>`};
+
+/* ---------- Tananyag ---------- */
+R.tananyag=v=>{let hide='',q='';
+ v.innerHTML='<div class="card"><div class="row"><input type="text" id="q" placeholder="Keresés névre, képletre vagy hétköznapi névre" aria-label="Keresés"><select id="hd" aria-label="Elrejtett oszlop"><option value="">Minden oszlop látszik</option><option value="n">Név elrejtve</option><option value="f">Képlet elrejtve</option><option value="c">Hétköznapi név elrejtve</option></select></div><p class="muted small">Elrejtett oszlopnál a cellára kattintva felfedheted a választ.</p><div class="tw"><table><thead><tr><th>Tudományos név</th><th>Képlet</th><th>Hétköznapi név</th></tr></thead><tbody id="tb"></tbody></table></div></div>';
+ const draw=()=>{let h='';for(const s of SECS){if(!G.sel.has(s.id)&&G.sel.size)continue;const rows=E.filter(e=>e.sec===s.id&&(!q||(e.names.join(' ')+plain(e.f)+e.cs.join(' ')).toLowerCase().includes(q)));if(!rows.length)continue;
+ h+='<tr class="sh"><td colspan="3">'+esc(s.t)+'</td></tr>';
+ for(const e of rows)h+='<tr><td class="'+(hide==='n'?'hid':'')+'">'+esc(e.names.join(' / '))+'</td><td class="'+(hide==='f'?'hid':'')+'">'+FX(e.f)+'</td><td class="'+(hide==='c'?'hid':'')+'">'+esc(e.cs.join(', '))+'</td></tr>'}
+ $('#tb').innerHTML=h||'<tr><td colspan="3" class="muted">Nincs találat.</td></tr>'};
+ $('#q').oninput=ev=>{q=ev.target.value.toLowerCase().trim();draw()};$('#hd').onchange=ev=>{hide=ev.target.value;draw()};
+ $('#tb').onclick=ev=>{const c=ev.target.closest('td.hid');if(c)c.classList.remove('hid')};draw()};
+
+/* ---------- Flashcard ---------- */
+R.flash=v=>{let q=shuffle(tasks()),total=q.length,done=0,flipped=false;
+ const draw=()=>{if(!q.length){v.innerHTML='<div class="card"><h2>Kész, a pakli elfogyott.</h2><p>Minden kártyát tudtál ebben a körben. Ismert tételek: '+E.filter(e=>isKnown(e.id)).length+' / '+E.length+'.</p><div class="row"><button class="btn primary" id="again">Új kör</button></div></div>';$('#again').onclick=()=>R.flash(v);return}
+ const t=q[0],e=t.e;flipped=false;
+ v.innerHTML='<div class="card"><div class="row" style="justify-content:space-between"><span class="lab">'+esc(t.sec.t)+'</span><span class="muted small">hátra: '+q.length+' · irány: '+DIRS[t.dir]+'</span></div><div class="bar"><i style="width:'+(100*done/total)+'%"></i></div><div class="flip"><div class="big">'+t.q+'</div></div><div class="tipbox" id="tb"></div><div id="back"></div><div class="row" id="ctl"><button class="btn primary" id="fl">Mutasd a választ</button><button class="btn tip" id="tp"></button></div></div>';
+ const getTip=tipWidget($('#tb'),$('#tp'),tips(t));
+ $('#fl').onclick=()=>{flipped=true;$('#back').innerHTML='<div class="back"><div class="big">'+t.shown+'</div><p class="muted small">'+(e.names.length?esc(e.names.join(' / '))+'<br>':'')+FX(e.f)+(e.cs.length?'<br>'+esc(e.cs.join(', ')):'')+'</p>'+(e.h?'<p class="small">'+esc(e.h)+'</p>':'')+'</div>';
+  $('#ctl').innerHTML='<button class="btn ok" id="y">Tudtam</button><button class="btn bad" id="n">Nem tudtam</button>';
+  $('#y').onclick=()=>{mark(e.id,true);q.shift();done++;draw()};
+  $('#n').onclick=()=>{mark(e.id,false);q.shift();q.splice(Math.min(4,q.length),0,t);draw()}}};
+ draw()};
+/* ---------- multiple-choice runner (10 questions per round) ---------- */
+function mcRunner(v,title,gen,sub){let n=0,ok=0,streak=0;const N=10;
+ const next=()=>{if(n>=N){v.innerHTML='<div class="card"><h2>Kör vége: '+ok+' / '+N+'</h2><div class="bar"><i style="width:'+(100*ok/N)+'%"></i></div><p>'+(ok>=9?'Kiváló.':ok>=7?'Jó, a hibásakat érdemes még átnézni.':'Még gyakorolj, és használd bátran a Tippet.')+'</p><div class="row"><button class="btn primary" id="rs">Új kör</button></div></div>';$('#rs').onclick=()=>mcRunner(v,title,gen,sub);return}
+ const it=gen();let tipsUsed=0,answered=false;
+ v.innerHTML='<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">'+title+'</h2><span class="stat muted small"><span>'+(n+1)+' / '+N+'</span><span>pont: '+ok+'</span><span>sorozat: '+streak+'</span></span></div>'+(sub?'<p class="muted small">'+sub+'</p>':'')+'<div class="big">'+it.q+'</div><div class="opts" id="o">'+it.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+o.html+'</button>').join('')+'</div><div class="tipbox" id="tb"></div><div id="fb"></div><div class="row" id="ctl"><button class="btn tip" id="tp"></button></div></div>';
+ const list=it.tips.slice();let fifty=it.opts.length>2;const all=(fifty?['50']:[]).concat(list);let k=0;
+ const tp=$('#tp');tp.textContent='Tipp';
+ tp.onclick=()=>{if(answered)return;const x=all[k++];tipsUsed++;
+  if(x==='50'){const wr=shuffle(it.opts.map((o,i)=>i).filter(i=>!it.opts[i].ok)).slice(0,Math.max(1,it.opts.length-2));wr.forEach(i=>{const b=$('.opt[data-i="'+i+'"]');b.classList.add('gone');b.disabled=true});const d=document.createElement('div');d.textContent='💡 Két rossz választ kiszürkítettem.';$('#tb').appendChild(d)}
+  else{const d=document.createElement('div');d.innerHTML='💡 '+x;$('#tb').appendChild(d)}
+  if(k>=all.length)tp.disabled=true};
+ $('#o').onclick=ev=>{const b=ev.target.closest('.opt');if(!b||answered||b.disabled)return;answered=true;const o=it.opts[+b.dataset.i];
+  document.querySelectorAll('.opt').forEach((x,i)=>{x.disabled=true;if(it.opts[i].ok)x.classList.add('right')});
+  if(o.ok){ok+=tipsUsed?0.5:1;streak++;$('#fb').innerHTML='<div class="fb ok">Helyes.'+(tipsUsed?' (Tippel fél pont.)':'')+(it.why?' '+it.why:'')+'</div>'}
+  else{b.classList.add('wrong');streak=0;$('#fb').innerHTML='<div class="fb bad">Nem ez a helyes válasz.'+(it.why?' '+it.why:'')+'</div>'}
+  if(it.onAns)it.onAns(o.ok);n++;tp.disabled=true;$('#ctl').innerHTML='<button class="btn primary" id="nx">'+(n>=N?'Eredmény':'Következő')+'</button>';$('#nx').onclick=next};
+ };next()}
+
+/* ---------- Kvíz ---------- */
+R.kviz=v=>{const T=tasks();if(!T.length){v.innerHTML='<div class="card">Nincs feladat a kijelölt témakörben.</div>';return}
+ mcRunner(v,'Kvíz',()=>{const t=rnd(T),d=distract(t,3);return{q:t.q+'<div class="muted small" style="font-size:.85rem">'+(t.ak==='formula'?'Melyik a képlete?':'Mi a neve?')+'</div>',
+  opts:shuffle([{html:t.shown,ok:true}].concat(d.map(x=>({html:x.shown,ok:false})))),tips:tips(t),why:t.e.h?esc(t.e.h):'',onAns:ok=>mark(t.e.id,ok)}},'Irány: '+DIRS[G.dir]+'. A Tipp először két rossz választ szűr ki.')};
+
+/* ---------- Igaz / hamis ---------- */
+R.igazhamis=v=>{const T=tasks();if(T.length<2){v.innerHTML='<div class="card">Nincs elég feladat.</div>';return}
+ mcRunner(v,'Igaz vagy hamis?',()=>{const t=rnd(T);const truth=Math.random()<.5;let shown=t.shown;if(!truth){const d=distract(t,1)[0];if(d)shown=d.shown;else truth=true}
+  const lead=t.dir==='n2f'||t.dir==='c2f'?t.q+' képlete':t.dir==='f2n'?t.q+' neve':t.q+' hétköznapi neve';
+  return{q:'<div class="small muted">Állítás</div>'+lead+' = '+shown,opts:[{html:'Igaz',ok:truth},{html:'Hamis',ok:!truth}],tips:tips(t),
+  why:'Helyesen: '+t.shown+'.',onAns:ok=>mark(t.e.id,ok)}},'Döntsd el, igaz-e az állítás.')};
+
+/* ---------- Töltések ---------- */
+const CH=[['Na','I',1],['K','I',1],['H','I',1],['Mg','II',2],['Ca','II',2],['Ba','II',2],['Al','III',3],['F','VII',-1],['Cl','VII',-1],['Br','VII',-1],['I','VII',-1],['O','VI',-2],['S','VI',-2]];
+const zs=z=>(z>0?'+':'−')+Math.abs(z);
+R.toltes=v=>{mcRunner(v,'Mekkora a töltése az ionnak?',()=>{const c=rnd(CH),[el,g,z]=c;const names={H:'hidrogén'};
+ const opts=[1,2,3,-1,-2].filter(x=>x!==z);const o=shuffle(opts).slice(0,3).concat([z]);
+ return{q:'<span class="fx">'+el+'</span><div class="small muted" style="font-size:.85rem">főcsoport: '+g+'.</div>',opts:shuffle(o).map(x=>({html:zs(x),ok:x===z})),
+ tips:['Az I–III. főcsoportban a főcsoport száma az <b>elektronok leadásával</b> keletkező pozitív töltés.','A VI. és VII. főcsoportban 8 mínusz a főcsoport száma az <b>felvett</b> elektronok száma, így a töltés negatív.'],why:'A '+el+' a '+g+'. főcsoportban van: '+zs(z)+'.'}},'A periódusos rendszer főcsoportjából következtetsz.')};
+
+/* ---------- Savból anion ---------- */
+const AC=[['HF','folysav',1,'F^-^','fluorid'],['HCl','sósav',1,'Cl^-^','klorid'],['H2S','kénhidrogén',1,'HS^-^','hidrogén-szulfid'],['H2S','kénhidrogén',2,'S^2-^','szulfid'],
+['H2SO4','kénsav',1,'HSO4^-^','hidrogén-szulfát'],['H2SO4','kénsav',2,'SO4^2-^','szulfát'],['H2SO3','kénessav',1,'HSO3^-^','hidrogén-szulfit'],['H2SO3','kénessav',2,'SO3^2-^','szulfit'],
+['HNO3','salétromsav',1,'NO3^-^','nitrát'],['HNO2','salétromossav',1,'NO2^-^','nitrit'],['H3PO4','foszforsav',1,'H2PO4^-^','dihidrogén-foszfát'],['H3PO4','foszforsav',2,'HPO4^2-^','hidrogén-foszfát'],['H3PO4','foszforsav',3,'PO4^3-^','foszfát'],
+['H2CO3','szénsav',1,'HCO3^-^','hidrogén-karbonát'],['H2CO3','szénsav',2,'CO3^2-^','karbonát'],['HClO4','perklórsav',1,'ClO4^-^','perklorát'],['HClO3','klórsav',1,'ClO3^-^','klorát'],['HClO2','klórossav',1,'ClO2^-^','klorit'],
+['HOCl','hipoklórossav',1,'OCl^-^','hipoklorit'],['HCN','kéksav',1,'CN^-^','cianid'],['H2SiO3','kovasav',2,'SiO3^2-^','szilikát'],['H2O','víz',1,'OH^-^','hidroxid']];
+R.savbol=v=>{mcRunner(v,'Savból anion',()=>{const it=rnd(AC),[a,an,n,ion,iname]=it;const rev=Math.random()<.3;
+ const dist=shuffle(AC.filter(x=>x[3]!==ion)).filter((x,i,arr)=>arr.findIndex(y=>y[3]===x[3])===i).slice(0,3);
+ if(!rev)return{q:FX(a)+' <span class="muted small" style="font-size:.85rem">('+esc(an)+')</span><div class="small muted" style="font-size:.85rem">lead '+n+' H<sup>+</sup>-t. Melyik ion keletkezik?</div>',
+  opts:shuffle([{html:FX(ion)+' <span class="muted small">'+esc(iname)+'</span>',ok:true}].concat(dist.map(x=>({html:FX(x[3])+' <span class="muted small">'+esc(x[4])+'</span>',ok:false})))),
+  tips:['Vedd el a savmolekulából a H-ket: a töltés annyi, ahány H<sup>+</sup>-t leadott ('+n+').','Ha a név <b>-át</b> végű, az egy anion az -sav sóiból; a „hidrogén-" előtag azt jelzi, hogy maradt H.'],why:FX(a)+' − '+n+' H⁺ = '+FX(ion)+' ('+esc(iname)+').'};
+ const dA=shuffle(AC.filter(x=>x[0]!==a)).filter((x,i,arr)=>arr.findIndex(y=>y[0]===x[0])===i).slice(0,3);
+ return{q:FX(ion)+'<div class="small muted" style="font-size:.85rem">'+esc(iname)+'ion. Melyik savból keletkezik?</div>',opts:shuffle([{html:FX(a)+' <span class="muted small">'+esc(an)+'</span>',ok:true}].concat(dA.map(x=>({html:FX(x[0])+' <span class="muted small">'+esc(x[1])+'</span>',ok:false})))),
+  tips:['Add vissza az ionnak a H<sup>+</sup>-okat, amíg semleges nem lesz.','A töltés abszolút értéke a hozzáadandó H száma ('+n+').'],why:FX(ion)+' + '+n+' H⁺ = '+FX(a)+'.'}},'Vedd el a savból a H⁺-okat, vagy fordítva.')};
+
+/* ---------- Beírás ---------- */
+R.beiras=v=>{const T=tasks(true);if(!T.length){v.innerHTML='<div class="card">Nincs feladat a kijelölt témakörben.</div>';return}
+ let q=shuffle(T),ok=0,n=0,streak=0;
+ const next=()=>{if(!q.length)q=shuffle(T);const t=q.shift();let done=false;
+  v.innerHTML='<div class="card"><div class="row" style="justify-content:space-between"><span class="lab">'+esc(t.sec.t)+'</span><span class="stat muted small"><span>jó: '+ok+' / '+n+'</span><span>sorozat: '+streak+'</span></span></div><div class="big">'+t.q+'</div><p class="muted small">'+(t.ak==='formula'?'Írd be a képletet. Töltés: SO4^2- vagy SO42-, kristályvíz: · vagy pont, pl. CuSO4.5H2O.':'Írd be a nevet. Az ékezetek nem számítanak.')+'</p><input type="text" id="in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Válasz"><div class="tipbox" id="tb"></div><div id="fb"></div><div class="row" id="ctl"><button class="btn primary" id="ck">Ellenőrzés</button><button class="btn tip" id="tp"></button><button class="btn" id="gv">Feladom</button></div></div>';
+  const inp=$('#in');inp.focus();const tl=tips(t);const getTip=tipWidget($('#tb'),$('#tp'),tl);
+  const fin=good=>{done=true;n++;if(good){ok++;streak++}else streak=0;mark(t.e.id,good);$('#ctl').innerHTML='<button class="btn primary" id="nx">Következő</button>';$('#nx').onclick=next;$('#nx').focus()};
+  $('#ck').onclick=()=>{if(done||!inp.value.trim())return;if(check(t,inp.value)){const pen=getTip();$('#fb').innerHTML='<div class="fb ok">Helyes: '+t.shown+(t.e.h?'<br><span class="small">'+esc(t.e.h)+'</span>':'')+'</div>';inp.disabled=true;fin(true)}else{$('#fb').innerHTML='<div class="fb bad">Még nem jó. Próbáld újra, vagy kérj Tippet.</div>';inp.classList.add('shake');setTimeout(()=>inp.classList.remove('shake'),300)}};
+  $('#gv').onclick=()=>{if(done)return;$('#fb').innerHTML='<div class="fb bad">A helyes válasz: '+t.shown+(t.e.h?'<br><span class="small">'+esc(t.e.h)+'</span>':'')+'</div>';inp.disabled=true;fin(false)};
+  inp.onkeydown=ev=>{if(ev.key==='Enter'){ev.preventDefault();done?next():$('#ck').click()}}};
+ next()};
+
+/* ---------- Párosítás ---------- */
+R.parositas=v=>{const T=tasks();if(T.length<3){v.innerHTML='<div class="card">Nincs elég feladat.</div>';return}
+ const round=()=>{const used=new Set(),P=[];for(const t of shuffle(T)){if(P.length>=6)break;if(used.has(t.key)||P.some(p=>normT(p.q.replace(/<[^>]+>/g,''))===normT(t.q.replace(/<[^>]+>/g,''))))continue;used.add(t.key);P.push(t)}
+  const L=P.map((t,i)=>({i,h:t.q})),Rt=shuffle(P.map((t,i)=>({i,h:t.shown})));let sel=null,left=P.length,miss=0;
+  v.innerHTML='<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">Párosítás</h2><span class="muted small" id="st"></span></div><p class="muted small">Kattints egy bal oldali elemre, majd a párjára. Irány: '+DIRS[G.dir]+'.</p><div class="pair"><div id="l">'+L.map(x=>'<button class="opt pc" data-s="l" data-i="'+x.i+'">'+x.h+'</button>').join('')+'</div><div id="r">'+Rt.map(x=>'<button class="opt pc" data-s="r" data-i="'+x.i+'">'+x.h+'</button>').join('')+'</div></div><div class="tipbox" id="tb"></div><div id="fb"></div><div class="row" id="ctl"><button class="btn tip" id="tp">Tipp</button></div></div>';
+  const st=()=>$('#st').textContent='hátra: '+left+' · hiba: '+miss;st();
+  $('#tp').onclick=()=>{const cand=sel!==null?sel:+rnd([...document.querySelectorAll('#l .pc:not(.done)')]).dataset.i;document.querySelectorAll('.pc.hint').forEach(x=>x.classList.remove('hint'));const lb=$('#l .pc[data-i="'+cand+'"]'),rb=$('#r .pc[data-i="'+cand+'"]');lb.classList.add('hint');rb.classList.add('hint');$('#tb').innerHTML='💡 A szaggatott keretes két elem összetartozik. '+(P[cand].e.h?esc(P[cand].e.h):'');miss+=0.5;st()};
+  v.onclick=ev=>{const b=ev.target.closest('.pc');if(!b)return;const s=b.dataset.s,i=+b.dataset.i;
+   if(s==='l'){document.querySelectorAll('#l .pc').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=i;return}
+   if(sel===null)return;
+   if(sel===i){b.classList.add('done');$('#l .pc[data-i="'+i+'"]').classList.add('done');$('#l .pc[data-i="'+i+'"]').classList.remove('sel','hint');b.classList.remove('hint');mark(P[i].e.id,true);sel=null;left--;st();
+    if(!left)$('#fb').innerHTML='<div class="fb ok">Mind párban. Hibapont: '+miss+'.</div>',$('#ctl').innerHTML='<button class="btn primary" id="nr">Új kör</button>',$('#nr').onclick=round}
+   else{miss++;mark(P[sel].e.id,false);b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),300);st()}}};
+ round()};
+
+/* ---------- Ionkirakó ---------- */
+const IONS=E.filter(e=>e.sec==='ion').map(e=>{const f=e.f,m=f.match(/^(.*)\^(\d?)([+-])\^$/),base=m[1],z=(m[2]?+m[2]:1)*(m[3]==='+'?1:-1);
+ return{e,f,base,z,poly:!/^[A-Z][a-z]?$/.test(base),skip:/^([A-Z][a-z]?)2$/.test(base),stem:e.names[0].replace(/-?ion$/,'')}}).filter(i=>!i.skip);
+const CAT=IONS.filter(i=>i.z>0),ANI=IONS.filter(i=>i.z<0);
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+const unit=(i,n)=>n===1?i.base:(i.poly?'('+i.base+')'+n:i.base+n);
+R.ionkirako=v=>{let st={ok:0,n:0};
+ const next=()=>{const c=rnd(CAT),a=rnd(ANI);const g=gcd(Math.abs(c.z),Math.abs(a.z)),nc=Math.abs(a.z)/g,na=Math.abs(c.z)/g;let vc=1,va=1,done=false;
+  v.innerHTML='<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">Ionkirakó</h2><span class="muted small">jó: '+st.ok+' / '+st.n+'</span></div><p>Rakd ki a(z) <b>'+esc(c.stem+'-'+a.stem)+'</b> képletét. A vegyület kifelé semleges, a töltések összege nulla.</p>'+
+  '<div class="ionrow"><div class="ion c"><span class="lab" style="color:inherit">kation</span><span class="big" style="padding:0">'+FX(c.f)+'</span><span class="small">'+esc(c.stem)+'</span><div class="step"><button class="btn" id="cm" aria-label="kevesebb kation">−</button><b id="cn">1</b><button class="btn" id="cp" aria-label="több kation">+</button></div></div>'+
+  '<div class="ion a"><span class="lab" style="color:inherit">anion</span><span class="big" style="padding:0">'+FX(a.f)+'</span><span class="small">'+esc(a.stem)+'</span><div class="step"><button class="btn" id="am" aria-label="kevesebb anion">−</button><b id="an">1</b><button class="btn" id="ap" aria-label="több anion">+</button></div></div></div>'+
+  '<div class="big"><span id="pv"></span><div class="small muted" id="sum" style="font-size:.9rem"></div></div><div class="tipbox" id="tb"></div><div id="fb"></div><div class="row" id="ctl"><button class="btn primary" id="ck">Ellenőrzés</button><button class="btn tip" id="tp"></button><button class="btn" id="gv">Feladom</button></div></div>';
+  const upd=()=>{$('#cn').textContent=vc;$('#an').textContent=va;$('#pv').innerHTML='<span class="fx">'+fmt(unit(c,vc))+fmt(unit(a,va))+'</span>';const s=vc*c.z+va*a.z;$('#sum').textContent=vc+'·('+zs(c.z)+') + '+va+'·('+zs(a.z)+') = '+(s>0?'+':s<0?'−':'')+Math.abs(s)+(s===0?'  ✓ semleges':'')};upd();
+  const bind=(id,f)=>$('#'+id).onclick=()=>{if(done)return;f();vc=Math.max(1,Math.min(9,vc));va=Math.max(1,Math.min(9,va));upd()};
+  bind('cm',()=>vc--);bind('cp',()=>vc++);bind('am',()=>va--);bind('ap',()=>va++);
+  tipWidget($('#tb'),$('#tp'),['A kation és az anion töltésének összege nulla. Nézd az alsó sort: addig változtasd a darabszámot, amíg 0 nem lesz.','Töltések: '+FX(c.f)+' és '+FX(a.f)+'. Keresd a legkisebb közös többszöröst: '+(Math.abs(c.z)*Math.abs(a.z)/g)+'.','Több anionnál az összetett iont zárójelbe tesszük, pl. Ca(OH)₂. Legkisebb számokat használd (pl. nem Ca₂(OH)₄).']);
+  const fin=g=>{done=true;st.n++;if(g)st.ok++;$('#ctl').innerHTML='<button class="btn primary" id="nx">Következő</button>';$('#nx').onclick=next};
+  $('#ck').onclick=()=>{if(done)return;const s=vc*c.z+va*a.z;if(vc===nc&&va===na){$('#fb').innerHTML='<div class="fb ok">Helyes: '+FX(unit(c,nc)+unit(a,na))+'</div>';fin(true)}
+   else{$('#fb').innerHTML='<div class="fb bad">'+(s!==0?'A töltések összege még nem nulla.':'A töltések kiegyenlítettek, de van kisebb egész számpár is.')+'</div>'}};
+  $('#gv').onclick=()=>{if(done)return;vc=nc;va=na;upd();$('#fb').innerHTML='<div class="fb bad">A helyes képlet: '+FX(unit(c,nc)+unit(a,na))+'</div>';fin(false)}};
+ next()};
+
+/* ---------- init ---------- */
+$('#dir').innerHTML=Object.entries(DIRS).map(([k,t])=>'<option value="'+k+'">'+t+'</option>').join('');
+$('#dir').onchange=ev=>{G.dir=ev.target.value;route()};
+addEventListener('hashchange',route);filters();known();route();
+</script>
+
+</body></html>
